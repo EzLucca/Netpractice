@@ -15,9 +15,10 @@
 | 169.254.0.0/16              | APIPA (Automatic Private IP) |
 | 255.255.255.255             | Broadcast address            |
 
-bit table
-8   7   6   5   4   3   2   1
-128 64  32  16  8   4   2   1
+| bit table|     |    |    |    |   |   |   |   |
+| :--------|:----|:---|:---|:---|:--|:--|:--|:--|
+| bit      | 8   | 7  | 6  | 5  | 4 | 3 | 2 | 1 |
+| value    | 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |
 
 ## Level 1
 
@@ -35,6 +36,18 @@ mask: 255.255.255.0
 - Interface B1
 ip: 104.97.23.12
 mask: 255.255.255.0
+
+| Before                |                        |
+|:--------------------- |:---------------------- |
+| Interface A1          | Interface B1           |
+| ip: xxx.xxx.xxx.xxx   | ip: 104.97.23.12       |
+| mask: 255.255.255.0   | masks: xxx.xxx.xxx.xxx |
+
+| After                 |                        |
+|:--------------------- |:---------------------- |
+| Interface A1          | Interface B1           |
+| ip: 104.97.23.12      | ip: 104.97.23.12       |
+| mask: 255.255.255.0   | masks: 255.255.255.0   |
 
 ### Network CD
 
@@ -69,18 +82,19 @@ mask: 255.255.255.252
 ip:
 mask: /30
 
+| Before                |                        |                       |                       |
+|:---------------------:|:---------------------- |:--------------------- |:--------------------- |
+| Interface A1          | Interface B1           | Interface C1          | Interface D1          |
+| ip:   xxx.xxx.xxx.xxx | ip:    192.168.101.222 | ip:   xxx.xxx.xxx.xxx | ip: xxx.xxx.xxx.xxx   |
+| mask: 255.255.255.224 | masks: xxx.xxx.xxx.xxx | mask: 255.255.255.252 | masks: /30            |
+
 ### Network AB
 
-| Before                |                       |
-|:---------------------:|:---------------------:|
-| Interface A1          | Interface B1          |
-| ip: xxx.xxx.xxx.xxx   | ip: 192.168.101.222   |
-| mask: 255.255.255.224 | masks: xxx.xxx.xxx.xxx|
-| After                 |                       |
-|:---------------------:|:---------------------:|
-| Interface A1          | Interface B1          |
-| ip: 192.168.101.221   | ip: 192.168.101.222   |
-| mask: 255.255.255.224 | masks: 255.255.255.224|
+| Before                |                       | | After                 |                       |
+|:---------------------:|:---------------------:| |:---------------------:|:---------------------:|
+| Interface A1          | Interface B1          | | Interface A1          | Interface B1          |
+| ip: xxx.xxx.xxx.xxx   | ip: 192.168.101.222   | | ip: 192.168.101.221   | ip: 192.168.101.222   |
+| mask: 255.255.255.224 | masks: xxx.xxx.xxx.xxx| | mask: 255.255.255.224 | masks: 255.255.255.224|
 
 First the mask should be the same for the network.
 Now to find the ip range I know already the 3 first octects of ip A1 should be the same as ip b1
@@ -126,7 +140,9 @@ the Ip of B1 belongs to the range of 192.168.101.193 – 192.168.101.222
 | Interface C1          | Interface D1          |
 | ip: xxx.xxx.xxx.xxx   | ip: xxx.xxx.xxx.xxx   |
 | mask: 255.255.255.252 | masks: /30            |
+
 | After                 |                       |
+|:--------------------- |:--------------------- |
 | Interface C1          | Interface D1          |
 | ip: xxx.xxx.xxx.xxx   | ip: xxx.xxx.xxx.xxx   |
 | mask: 255.255.255.252 | masks: /30            |
@@ -151,6 +167,7 @@ For the ip number it can be any number on the default ips.
 | Interface A1          | Interface B1          | Interface C1          |
 | ip: 104.198.97.125    | ip: xxx.xxx.xxx.xxx   | ip: xxx.xxx.xxx.xxx   |
 | mask: xxx.xxx.xxx.xxx | masks: xxx.xxx.xxx.xxx| mask: 255.255.255.128 |
+
 | After                 |                       |                       |
 |:---------------------:|:---------------------:|:---------------------:|
 | Interface A1          | Interface B1          | Interface C1          |
@@ -188,6 +205,7 @@ Now the Ip of A1 belongs to subnet 1 this means the last octect of the ip should
 | Interface A1          | Interface B1           | Interface R1          | Interface R2          | Interface R3          |
 | ip:   103.153.114.132 | ip:    xxx.xxx.xxx.xxx | ip:   xxx.xxx.xxx.xxx | ip:   103.153.114.1   | ip:   103.153.114.244 |
 | mask: xxx.xxx.xxx.xxx | masks: xxx.xxx.xxx.xxx | mask: xxx.xxx.xxx.xxx | mask: 255.255.255.128 | mask: 255.255.255.192 |
+
 | After                 |                        |                       |                       |                       |
 |:--------------------- |:---------------------- |:--------------------- |:--------------------- |:--------------------- |
 | Interface A1          | Interface B1           | Interface R1          | Interface R2          | Interface R3          |
