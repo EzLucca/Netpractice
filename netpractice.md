@@ -137,7 +137,6 @@ the Ip of B1 belongs to the range of 192.168.101.193 – 192.168.101.222
 
 <table>
 <tr>
-<td style="padding-right:20px;">
 
 | Before                |                       |
 |:--------------------- |:--------------------- |
@@ -145,16 +144,12 @@ the Ip of B1 belongs to the range of 192.168.101.193 – 192.168.101.222
 | ip: xxx.xxx.xxx.xxx   | ip: xxx.xxx.xxx.xxx   |
 | mask: 255.255.255.252 | masks: /30            |
 
-</td>
-<td>
-
 | After                 |                       |
 |:--------------------- |:--------------------- |
 | Interface C1          | Interface D1          |
 | ip: xxx.xxx.xxx.xxx   | ip: xxx.xxx.xxx.xxx   |
 | mask: 255.255.255.252 | masks: /30            |
 
-</td>
 </tr>
 </table>
 
