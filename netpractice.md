@@ -37,17 +37,11 @@ mask: 255.255.255.0
 ip: 104.97.23.12
 mask: 255.255.255.0
 
-| Before                |                        |
-|:--------------------- |:---------------------- |
-| Interface A1          | Interface B1           |
-| ip: xxx.xxx.xxx.xxx   | ip: 104.97.23.12       |
-| mask: 255.255.255.0   | masks: xxx.xxx.xxx.xxx |
-
-| After                 |                        |
-|:--------------------- |:---------------------- |
-| Interface A1          | Interface B1           |
-| ip: 104.97.23.12      | ip: 104.97.23.12       |
-| mask: 255.255.255.0   | masks: 255.255.255.0   |
+| Before                |                        | | After                 |                        |
+|:--------------------- |:---------------------- |-|:--------------------- |:---------------------- |
+| Interface A1          | Interface B1           |-| Interface A1          | Interface B1           |
+| ip: xxx.xxx.xxx.xxx   | ip: 104.97.23.12       |-| ip: 104.97.23.12      | ip: 104.97.23.12       |
+| mask: 255.255.255.0   | masks: 255.255.255.0   |-| mask: 255.255.255.0   | masks: xxx.xxx.xxx.xxx |
 
 ### Network CD
 
@@ -135,25 +129,11 @@ the Ip of B1 belongs to the range of 192.168.101.193 – 192.168.101.222
 
 ## Network CD
 
-<table>
-<tr>
-
-| Before                |                       |
-|:--------------------- |:--------------------- |
-| Interface C1          | Interface D1          |
-| ip: xxx.xxx.xxx.xxx   | ip: xxx.xxx.xxx.xxx   |
-| mask: 255.255.255.252 | masks: /30            |
-
-| After                 |                       |
-|:--------------------- |:--------------------- |
-| Interface C1          | Interface D1          |
-| ip: xxx.xxx.xxx.xxx   | ip: xxx.xxx.xxx.xxx   |
-| mask: 255.255.255.252 | masks: /30            |
-
-</tr>
-</table>
-
-
+| Before                |                       | | After                 |                       |
+|:--------------------- |:--------------------- |-|:--------------------- |:--------------------- |
+| Interface C1          | Interface D1          |-| Interface C1          | Interface D1          |
+| ip: xxx.xxx.xxx.xxx   | ip: xxx.xxx.xxx.xxx   |-| ip: xxx.xxx.xxx.xxx   | ip: xxx.xxx.xxx.xxx   |
+| mask: 255.255.255.252 | masks: /30            |-| mask: 255.255.255.252 | masks: /30            |
 
 Again every net has the same mask.
 mask:          255.     255.     255.     252
@@ -220,5 +200,49 @@ Now the Ip of A1 belongs to subnet 1 this means the last octect of the ip should
 | ip:   103.153.114.132 | ip:    103.153.114.131 | ip:   103.153.114.130 | ip:   103.153.114.1   | ip:   103.153.114.244 |
 | mask: xxx.xxx.xxx.xxx | masks: xxx.xxx.xxx.xxx | mask: xxx.xxx.xxx.xxx | mask: 255.255.255.128 | mask: 255.255.255.192 |
 
-Interface A1 and B1 are connectec to interface R1 via switch. A1_IP is given (103.153.114.132). 
+- Solving the IP:
+Interface A1 and B1 are connectec to interface R1 via switch. A1_IP is given (103.153.114.132) so the B1_IP and R1_IP should
+be similar (103.153.114.130). The key fact here is that the A1_IP given belongs to class A (255.xxx.xxx.xxx)so any number from
+1-254 will fit on the last octec. 
 
+- Solving the Mask:
+The mask in this case can be any number starting from CIDR:/1 or 128.0.0.0.
+
+## Level 5
+
+| Before                 |                        |                        |
+|:---------------------- |:---------------------- |:---------------------- |
+| Interface A1           | Host A                 | Interface R1           |
+| ip:    xxx.xxx.xxx.xxx | from:  xxx.xxx.xxx.xxx | ip:    042.201.037.126 |
+| masks: xxx.xxx.xxx.xxx | to  :  xxx.xxx.xxx.xxx | masks: 255.255.255.128 |
+|:---------------------- |:---------------------- |:---------------------- |
+| Interface B1           | Host B                 | Interface R2           |
+| ip:    xxx.xxx.xxx.xxx | from:  default         | ip:    167.076.135.254 |
+| masks: xxx.xxx.xxx.xxx | to  :  xxx.xxx.xxx.xxx | masks: 255.255.192.000 |
+
+There is 2 networks here B1-R2 and A1-R1. The hostmachine A and B /from/ value is default and the /to/ value should be the ip
+of the interface R1 and R2 respectively.
+As both IP and masks are know from R1-R2 it is easy to understand that the mask should be the same for each network and 
+ip should be on value below the last octec.
+
+| Solution               |                        |                        |
+|:---------------------- |:---------------------- |:---------------------- |
+| Interface A1           | Host A                 | Interface R1           |
+| ip:    042.201.037.125 | from:  default         | ip:    042.201.037.126 |
+| masks: 255.255.255.128 | to  :  042.201.037.126 | masks: 255.255.255.128 |
+|:---------------------- |:---------------------- |:---------------------- |
+| Interface B1           | Host B                 | Interface R2           |
+| ip:    167.076.135.253 | from:  default         | ip:    167.076.135.254 |
+| masks: 255.255.192.000 | to  :  167.076.135.254 | masks: 255.255.192.000 |
+
+## Level 6
+
+| Before                 |                         |                        |
+|:---------------------- |:----------------------- |:---------------------- |
+| Host A                 | Interface A1            | Interface R1           |
+| from:  xxx.xxx.xxx.xxx | ip:    092.121.208.227  | ip:   xxx.xxx.xxx.xxx  |
+| to  :  xxx.xxx.xxx.xxx | masks: xxx.xxx.xxx.xxx  | mask: 255.255.255.128  |
+|:---------------------- |:----------------------- |:---------------------- |
+| Interface R2           | Router R                | Internet               |
+| ip:   163.172.250.12   | from:  xxx.xxx.xxx.xxx  | from:  xxx.xxx.xxx.xxx |
+| mask: 255.255.255.240  | to  :  163.172.250.1    | to  :  163.172.250.12  |
