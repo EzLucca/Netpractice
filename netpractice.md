@@ -237,7 +237,7 @@ ip should be on value below the last octec.
 
 ## Level 6
 
-![Level 6](./Levels/level6.png)
+![Level 6](./Levels/Level6.png)
 
 | Before                 |                         |                        |
 |:---------------------- |:----------------------- |:---------------------- |
