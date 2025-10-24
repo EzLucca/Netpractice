@@ -22,6 +22,8 @@
 
 ## Level 1
 
+![Level 1](./Imgs/Level1.png)
+
 This exercise has 4 computers (A1 and B1) in one network and (C1 and D1) in another network.
 The goal is make the comunication between computers on the same network.
 
@@ -62,6 +64,8 @@ ip: 211.191.1.1 to 211.191.254.254
 mask: 255.255.0.0
 
 ## Level 2
+
+![Level 2](./Imgs/Level2.png)
 
 - Interface A1
 ip:
@@ -150,6 +154,8 @@ For the ip number it can be any number on the default ips.
 
 ## Level 3
 
+![Level 3](./Imgs/Level3.png)
+
 | Before                |                       |                       |
 |:---------------------:|:---------------------:|:---------------------:|
 | Interface A1          | Interface B1          | Interface C1          |
@@ -188,6 +194,8 @@ Now the Ip of A1 belongs to subnet 1 this means the last octect of the ip should
 
 ## Level 4
 
+![Level 4](./Imgs/Level4.png)
+
 | Before                |                        |                       |                       |                       |
 |:--------------------- |:---------------------- |:--------------------- |:--------------------- |:--------------------- |
 | Interface A1          | Interface B1           | Interface R1          | Interface R2          | Interface R3          |
@@ -209,6 +217,8 @@ be similar (103.153.114.130). The key fact here is that the A1_IP given belongs 
 The mask in this case can be any number starting from CIDR:/1 or 128.0.0.0.
 
 ## Level 5
+
+![Level 5](./Imgs/Level5.png)
 
 | Before                 |                        |                        |
 |:---------------------- |:---------------------- |:---------------------- |
@@ -237,7 +247,7 @@ ip should be on value below the last octec.
 
 ## Level 6
 
-![Level 6](./Levels/Level6.png)
+![Level 6](./Imgs/Level6.png)
 
 | Before                 |                         |                        |
 |:---------------------- |:----------------------- |:---------------------- |
