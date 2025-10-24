@@ -1,12 +1,12 @@
 # Netpractice
 
-| **Class** | **First Octet ** | **Subnet Mask**    | **No. Networks**     | **Hosts Network** | **Purpose / Example**                   |
-| :-------- | :--------------- | :----------------- | :------------------- | :---------------- | :-------------------------------------- |
-| **A**     | 1 – 126          | 255.0.0.0 (/8)     | 128 (minus reserved) | 16,777,214        | Very large networks (e.g. 10.0.0.0)     |
-| **B**     | 128 – 191        | 255.255.0.0 (/16)  | 16,384               | 65,534            | Medium-sized networks (e.g. 172.16.0.0) |
-| **C**     | 192 – 223        | 255.255.255.0 (/24)| 2,097,152            | 254               | Small networks (e.g. 192.168.1.0)       |
-| **D**     | 224 – 239        | N/A                | N/A                  | N/A               | Multicasting (e.g. 224.0.0.1)           |
-| **E**     | 240 – 255        | N/A                | N/A                  | N/A               | Experimental / Research                 |
+| Class | First Octet  | Subnet Mask        | No. Networks         | Hosts Network | Purpose / Example                       |
+| :---- | :----------- | :----------------- | :------------------- | :------------ | :-------------------------------------- |
+| A     | 1 – 126      | 255.0.0.0 (/8)     | 128 (minus reserved) | 16,777,214    | Very large networks (e.g. 10.0.0.0)     |
+| B     | 128 – 191    | 255.255.0.0 (/16)  | 16,384               | 65,534        | Medium-sized networks (e.g. 172.16.0.0) |
+| C     | 192 – 223    | 255.255.255.0 (/24)| 2,097,152            | 254           | Small networks (e.g. 192.168.1.0)       |
+| D     | 224 – 239    | N/A                | N/A                  | N/A           | Multicasting (e.g. 224.0.0.1)           |
+| E     | 240 – 255    | N/A                | N/A                  | N/A           | Experimental / Research                 |
 
 | Address                     | Meaning                      |
 | :-------------------------- | :--------------------------- |
@@ -91,10 +91,10 @@ mask: /30
 ### Network AB
 
 | Before                |                       | | After                 |                       |
-|:---------------------:|:---------------------:| |:---------------------:|:---------------------:|
-| Interface A1          | Interface B1          | | Interface A1          | Interface B1          |
-| ip: xxx.xxx.xxx.xxx   | ip: 192.168.101.222   | | ip: 192.168.101.221   | ip: 192.168.101.222   |
-| mask: 255.255.255.224 | masks: xxx.xxx.xxx.xxx| | mask: 255.255.255.224 | masks: 255.255.255.224|
+|:---------------------:|:---------------------:|-|:---------------------:|:---------------------:|
+| Interface A1          | Interface B1          |-| Interface A1          | Interface B1          |
+| ip: xxx.xxx.xxx.xxx   | ip: 192.168.101.222   |-| ip: 192.168.101.221   | ip: 192.168.101.222   |
+| mask: 255.255.255.224 | masks: xxx.xxx.xxx.xxx|-| mask: 255.255.255.224 | masks: 255.255.255.224|
 
 First the mask should be the same for the network.
 Now to find the ip range I know already the 3 first octects of ip A1 should be the same as ip b1
@@ -104,7 +104,7 @@ ip A1: 192.168.101.xxx
 to find the range we need to use bit table
 Starting from left to right if the value fits in the last octet the bit will be 1
 
-| bit table|.....|....|....|....|...|...|...|...|
+| bit table|     |    |    |    |   |   |   |   |
 | :--------|:----|:---|:---|:---|:--|:--|:--|:--|
 | bit      | 8   | 7  | 6  | 5  | 4 | 3 | 2 | 1 |
 | value    | 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |
@@ -135,17 +135,30 @@ the Ip of B1 belongs to the range of 192.168.101.193 – 192.168.101.222
 
 ## Network CD
 
+<table>
+<tr>
+<td style="padding-right:20px;">
+
 | Before                |                       |
 |:--------------------- |:--------------------- |
 | Interface C1          | Interface D1          |
 | ip: xxx.xxx.xxx.xxx   | ip: xxx.xxx.xxx.xxx   |
 | mask: 255.255.255.252 | masks: /30            |
 
+</td>
+<td>
+
 | After                 |                       |
 |:--------------------- |:--------------------- |
 | Interface C1          | Interface D1          |
 | ip: xxx.xxx.xxx.xxx   | ip: xxx.xxx.xxx.xxx   |
 | mask: 255.255.255.252 | masks: /30            |
+
+</td>
+</tr>
+</table>
+
+
 
 Again every net has the same mask.
 mask:          255.     255.     255.     252
