@@ -237,6 +237,8 @@ ip should be on value below the last octec.
 
 ## Level 6
 
+![Level 6](./Levels/level6.png)
+
 | Before                 |                         |                        |
 |:---------------------- |:----------------------- |:---------------------- |
 | Host A                 | Interface A1            | Interface R1           |
