@@ -517,3 +517,38 @@ with cidrs:24.
 |               | from: 009.000.000.254/24 | to:    163.172.250.012 |
 |               | from: default            | to:    163.172.250.012 |
 
+## Level 10
+
+![Level 10](./Imgs/Level10.png)
+
+There are 5 subnets on this task: H11-H21-R11, Internet-R12, R13-R21, H41-R23 and H31-R22.
+
+### Subnet H11-H21-R11
+
+R11 give the subnet mask: 255.255.255.128 for the H21-ip adding one will work.
+This should be working.
+
+### Subnet Internet-R12
+
+Nothing need to be changed here.
+
+### Subnet R13-R21
+
+The subnet mask is given by R21 255.255.255.252 and need to be placed in R13 to make it work.
+For Router R1 only the Cidrs need to be changed to 24.
+
+### Subnet H41-R23
+
+Subnet mask is given by H41 255.255.255.192 and the R23-ip is given by router table H4
+133.122.45.129.
+
+### Subnet H31-R22
+
+This is the most tricky one. The ip can be similar to 133.122.45.xxx. To choose the correct last octec
+is important to not overlap ips.
+
+H11-H21-R11 use 255.255.255.128 wich means 128 ips per subnet. So from 1 to 128 they are taken.
+R13-R21 use 255.255.255.252 wich means 4 ips per subnet. So from 255 to 252 are taken.
+H41-R23 use 255.255.255.192 wich means 64 ips per subnet. So form 128 to 192 the ips are taken.
+Finally H31-R22 can use the mask 255.255.255.252 for simplicity. This means 4 ips per subnet
+So is possible to take 193 - 194 from the subnet 133.122.45.192-165 where 192 and 195 can't be used.
